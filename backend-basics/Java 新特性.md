@@ -48,33 +48,46 @@ Java 23        - 2024.09
 
 **对比图**：
 ```mermaid
-graph LR
-    subgraph 平台线程
-        PT1[平台线程 1<br/>1MB 栈内存]
-        PT2[平台线程 2<br/>1MB 栈内存]
-        PT3[平台线程 3<br/>1MB 栈内存]
+graph TB
+    subgraph 平台线程["🔴 平台线程（Platform Thread）"]
+        direction TB
+        P1[平台线程 1<br/>1MB 栈内存<br/>OS 调度]
+        P2[平台线程 2<br/>1MB 栈内存<br/>OS 调度]
+        P3[平台线程 3<br/>1MB 栈内存<br/>OS 调度]
     end
     
-    subgraph 虚拟线程
-        VT1[虚拟线程 1<br/>1KB 栈内存]
-        VT2[虚拟线程 2<br/>1KB 栈内存]
-        VT3[虚拟线程 3<br/>1KB 栈内存]
-        VT4[...<br/>百万级]
+    subgraph 虚拟线程["🟢 虚拟线程（Virtual Thread）"]
+        direction TB
+        V1[虚拟线程 1<br/>1KB 栈内存<br/>JVM 调度]
+        V2[虚拟线程 2<br/>1KB 栈内存<br/>JVM 调度]
+        V3[虚拟线程 3<br/>1KB 栈内存<br/>JVM 调度]
+        V4[虚拟线程 4<br/>1KB 栈内存<br/>JVM 调度]
+        V5[...<br/>百万级并发]
     end
     
-    PT1 --> VT1
-    PT1 --> VT2
-    PT2 --> VT3
-    PT3 --> VT4
+    P1 -.-> V1
+    P1 -.-> V2
+    P2 -.-> V3
+    P3 -.-> V4
+    P3 -.-> V5
     
-    style PT1 fill:#ffcccc
-    style PT2 fill:#ffcccc
-    style PT3 fill:#ffcccc
-    style VT1 fill:#ccffcc
-    style VT2 fill:#ccffcc
-    style VT3 fill:#ccffcc
-    style VT4 fill:#ccffcc
+    style 平台线程 fill:#ffe6e6,stroke:#cc0000
+    style 虚拟线程 fill:#e6ffe6,stroke:#00cc00
+    style P1 fill:#ffcccc,stroke:#cc0000
+    style P2 fill:#ffcccc,stroke:#cc0000
+    style P3 fill:#ffcccc,stroke:#cc0000
+    style V1 fill:#ccffcc,stroke:#00cc00
+    style V2 fill:#ccffcc,stroke:#00cc00
+    style V3 fill:#ccffcc,stroke:#00cc00
+    style V4 fill:#ccffcc,stroke:#00cc00
+    style V5 fill:#ccffcc,stroke:#00cc00
 ```
+
+**说明**：
+- 🔴 **左边**：平台线程 - 数量少（几千个），每个 1MB 栈内存
+- 🟢 **右边**：虚拟线程 - 数量多（百万级），每个 1KB 栈内存
+- ⚡ **虚线箭头**：M 个虚拟线程映射到 N 个平台线程（M:N 调度）
+- 💡 **核心**：虚拟线程阻塞时自动挂起，释放平台线程给其他虚拟线程使用
 
 **特性对比表**：
 
