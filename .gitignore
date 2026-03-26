@@ -1,0 +1,16 @@
+# 通用忽略文件
+
+# 日志和临时文件
+*.log
+*.tmp
+*.swp
+*~
+
+# 系统文件
+.DS_Store
+Thumbs.db
+
+# IDE 配置
+.idea/
+.vscode/
+*.iml
