@@ -1,0 +1,48 @@
+# ===================================
+# interview-prep 仓库忽略文件
+# ===================================
+
+# 神乐工作空间配置文件（不提交）
+AGENTS.md
+BOOTSTRAP.md
+HEARTBEAT.md
+IDENTITY.md
+SOUL.md
+TOOLS.md
+USER.md
+
+# 神乐运行时目录（不提交）
+.openclaw/
+memory/
+
+# 神乐脚本文件（不提交）
+search_user*.py
+
+# 子模块/嵌入式仓库（不提交）
+projects/xiaohongshu-ops-skill/
+xhs-android-automation/
+
+# 其他常见忽略文件
+*.log
+*.tmp
+*.swp
+*~
+.DS_Store
+Thumbs.db
+
+# IDE 配置（如需要）
+.idea/
+.vscode/
+*.iml
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.env
+.venv/
+
+# Node.js
+node_modules/
+npm-debug.log
+yarn-error.log
